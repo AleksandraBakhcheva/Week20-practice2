@@ -23,8 +23,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
             item.classList.add("project__" + i);
             document.querySelector(".projects").appendChild(item);
             document.querySelector(".project__" + i).innerHTML += projects[i].name + " " + "<a href='"+projects[i].svn_url+"'>Link</a>";
-            document.querySelector("a").setAttribute('target', '_blank');
+            
         }
+        document.querySelectorAll("a").forEach(function(a) {
+            a.setAttribute('target', '_blank');
+        });
     })
     .catch(error => console.log(error));
 });
