@@ -1,4 +1,5 @@
 const WARNINGERROR = "При загрузке произошла ошибка. Пожалуйста, попробуйте снова";
+const ERRORPIC = "images/error-cat.png";
 
 document.addEventListener("DOMContentLoaded", function(event) {
     let div = document.createElement("div");
@@ -10,7 +11,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
     .then(user => {
         document.querySelector(".info").innerHTML = "Логин: " + user.login + "</br>" + "Количество репозиториев: " + user.public_repos + "</br>" + "Дата создания: " + user.created_at;
     })
-    .catch(ERROR => alert(WARNINGERROR));
+    .catch(ERROR => {
+        let error = document.createElement("div");
+        error.classList.add("error")
+        let message = document.createElement("p")
+        message.classList.add("errormsg");
+        error.append(message);
+        div.append(error);
+        document.querySelector(".errormsg").innerHTML = WARNINGERROR;
+        let image = document.createElement("img");
+        image.setAttribute('src', ERRORPIC);
+        image.width = 300;
+        error.append(image);
+    });
     let projects = document.createElement("div");
     projects.innerHTML = `<h1>Мои проекты:</h1>
     <div class="projects"></div>`;
@@ -28,5 +41,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
             a.setAttribute('target', '_blank');
         });
     })
-    .catch(ERROR => alert(WARNINGERROR));
+    .catch(ERROR => {
+        let error = document.createElement("div");
+        error.classList.add("error")
+        let message = document.createElement("p")
+        message.classList.add("errormsg1");
+        error.append(message);
+        projects.append(error);
+        document.querySelector(".errormsg1").innerHTML = WARNINGERROR;
+        let image = document.createElement("img");
+        image.setAttribute('src', ERRORPIC);
+        image.width = 300;
+        error.append(image);
+    });
 });
